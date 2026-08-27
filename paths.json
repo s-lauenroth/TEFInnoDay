@@ -1,22 +1,22 @@
 {
   "mappings": [
-    "/content/wknd-universal/language-masters/en:/",
-    "/content/wknd-universal/language-masters/en/:/en/",
-    "/content/wknd-universal/language-masters/fr/:/fr/",
-    "/content/wknd-universal/language-masters/fr:/fr",
-    "/content/wknd-universal/language-masters/es/:/es/",
-    "/content/wknd-universal/language-masters/es:/es",
-    "/content/wknd-universal/language-masters/ja/:/ja/",
-    "/content/wknd-universal/language-masters/ja:/ja",
-    "/content/wknd-universal/language-masters/de/:/de/",
-    "/content/wknd-universal/language-masters/de:/de",
-    "/content/wknd-universal/configuration:/.helix/config.json",
-    "/content/wknd-universal/metadata:/metadata.json",
-    "/content/wknd-universal/redirects:/redirects.json",
-    "/content/wknd-universal/placeholders:/placeholders.json"
+    "/content/TEFInnoDay/language-masters/en:/",
+    "/content/TEFInnoDay/language-masters/en/:/en/",
+    "/content/TEFInnoDay/language-masters/fr/:/fr/",
+    "/content/TEFInnoDay/language-masters/fr:/fr",
+    "/content/TEFInnoDay/language-masters/es/:/es/",
+    "/content/TEFInnoDay/language-masters/es:/es",
+    "/content/TEFInnoDay/language-masters/ja/:/ja/",
+    "/content/TEFInnoDay/language-masters/ja:/ja",
+    "/content/TEFInnoDay/language-masters/de/:/de/",
+    "/content/TEFInnoDay/language-masters/de:/de",
+    "/content/TEFInnoDay/configuration:/.helix/config.json",
+    "/content/TEFInnoDay/metadata:/metadata.json",
+    "/content/TEFInnoDay/redirects:/redirects.json",
+    "/content/TEFInnoDay/placeholders:/placeholders.json"
   ],
   "includes": [
-    "/content/wknd-universal/",
-    "/content/dam/wknd-universal/"
+    "/content/TEFInnoDay/",
+    "/content/dam/TEFInnoDay/"
   ]
 }
