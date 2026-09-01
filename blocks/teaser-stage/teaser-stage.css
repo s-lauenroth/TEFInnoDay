@@ -1,0 +1,179 @@
+/*
+ * Teaser Stage — O2 homepage hero stage.
+ * Brand-aware: the background gradient and CTA colour derive from --brand-*
+ * tokens (O2 default), with per-brand overrides for Blau / Aldi Talk so the
+ * stage switches with the page theme.
+ */
+
+.teaser-stage-wrapper {
+  max-width: unset;
+}
+
+.teaser-stage {
+  --stage-text-color: #00001e;
+  --stage-badge-bg: #f65d7c;
+  --stage-badge-text: #00008c;
+
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  min-height: 600px;
+  overflow: hidden;
+  color: var(--stage-text-color);
+
+  /* O2 "Beyond Blue" diagonal gradient (default brand). */
+  background-image: linear-gradient(
+    -45deg,
+    #95c3ff 0%,
+    #5591ff 20%,
+    #1661ff 40%,
+    #013ce2 60%,
+    #001eb7 80%,
+    #02018d 100%
+  );
+}
+
+/* Media column (product image), full-height on the left. */
+.teaser-stage__media {
+  position: relative;
+  align-self: stretch;
+  min-height: 600px;
+}
+
+.teaser-stage__media picture,
+.teaser-stage__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Content column. */
+.teaser-stage__content {
+  padding: var(--spacing-xxlarge, 4rem) var(--spacing-xlarge, 3rem);
+  max-width: 620px;
+}
+
+.teaser-stage__content h1,
+.teaser-stage__content h2 {
+  font-family: var(--extra-font-family, var(--heading-font-family));
+  font-size: clamp(28px, 3vw, 34px);
+  line-height: 1.15;
+  margin: 0 0 var(--spacing-xsmall, 0.75rem);
+  color: var(--stage-text-color);
+}
+
+.teaser-stage__content p {
+  font-size: var(--body-font-size-s, 16px);
+  line-height: 1.45;
+  margin: 0 0 var(--spacing-small, 1rem);
+  max-width: 34rem;
+}
+
+.teaser-stage__badge {
+  display: inline-block;
+  margin-bottom: var(--spacing-small, 1rem);
+  padding: 3px 10px;
+  border-radius: 4px;
+  background: var(--stage-badge-bg);
+  color: var(--stage-badge-text);
+  font-family: var(--heading-font-family);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.teaser-stage__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-large, 2.5rem);
+  margin-top: var(--spacing-regular, 1.5rem);
+}
+
+.teaser-stage__price {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  column-gap: 6px;
+  align-items: end;
+  line-height: 1;
+}
+
+.teaser-stage__price-label {
+  grid-column: 1 / -1;
+  font-size: 12px;
+}
+
+.teaser-stage__price-amount {
+  display: flex;
+  align-items: flex-start;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+}
+
+.teaser-stage__price-euros {
+  font-size: 30px;
+}
+
+.teaser-stage__price-cents {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.teaser-stage__price-suffix {
+  grid-column: 1 / -1;
+  font-size: 12px;
+}
+
+.teaser-stage .teaser-stage__cta.button {
+  padding: 12px 24px;
+  border: 1px solid rgb(0 0 30 / 10%);
+  border-radius: var(--border-radius-base, 4px);
+  background: #fff;
+  color: var(--brand-theme-color, var(--main-accent-color, #0050ff));
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: visible;
+}
+
+.teaser-stage .teaser-stage__cta.button::after {
+  content: none;
+}
+
+.teaser-stage .teaser-stage__cta.button:hover {
+  background: #f2f6ff;
+  color: var(--brand-theme-color, var(--main-accent-color, #0050ff));
+  text-decoration: none;
+}
+
+/* --- Per-brand background overrides --- */
+body.blau-theme .teaser-stage {
+  --stage-text-color: #ffffff;
+  background-image: linear-gradient(-45deg, #7fd3f4 0%, #23b3e9 45%, #1c7fb0 100%);
+}
+
+body.alditalk-theme .teaser-stage {
+  --stage-text-color: #ffffff;
+  --stage-badge-bg: #ffc72c;
+  --stage-badge-text: #001e78;
+  background-image: linear-gradient(-45deg, #00b4dc 0%, #0068b3 55%, #001e78 100%);
+}
+
+/* --- Responsive: stack media above content on smaller screens --- */
+@media (width < 900px) {
+  .teaser-stage {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+
+  .teaser-stage__media {
+    min-height: 320px;
+  }
+
+  .teaser-stage__content {
+    padding: var(--spacing-large, 2.5rem) var(--spacing-regular, 1.5rem);
+  }
+}

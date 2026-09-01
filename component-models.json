@@ -1225,6 +1225,78 @@
     ]
   },
   {
+    "id": "teaser-stage",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Product Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Headline & Subtitle",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "badge",
+        "label": "Badge / Highlight",
+        "description": "Optional pill shown above the headline, e.g. \"200 € Tauschvorteil\".",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "priceprefix",
+        "label": "Price Prefix",
+        "description": "Small label before the price, e.g. \"nur\".",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "price",
+        "label": "Price",
+        "description": "Amount, e.g. \"37,49 €\". Euros render large, the rest small.",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "pricesuffix",
+        "label": "Price Suffix",
+        "description": "Small label after the price, e.g. \"monatlich\".",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "ctalabel",
+        "label": "CTA Button Label",
+        "description": "Leave empty to hide the button.",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "ctalink",
+        "label": "CTA Button Link"
+      }
+    ]
+  },
+  {
       "id": "dynamic-media-image",
       "fields": [
         {

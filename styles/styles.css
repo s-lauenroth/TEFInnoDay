@@ -344,6 +344,46 @@ body.green-theme {
   --main-accent-color: #00c4ff;
   --nav-text-color:#000000;
 }
+
+/*
+ * TEFInnoDay multi-brand themes (O2 / Blau / Aldi Talk).
+ * These set the same --brand-* custom properties that the CF-based brand loader
+ * (blocks/header/header.js applyCFTheme) injects at runtime, so a static theme
+ * class and a Brand Theme Content Fragment are interchangeable. Values are the
+ * verified brand colors (O2 Beyond Blue #0050FF / Blau #23B3E9 + Lila #64388D /
+ * Aldi Talk Miami Blue #00B4DC + Dark Blue #001E78).
+ */
+body.o2-theme {
+  --brand-theme-color: #0050ff;        /* O2 Beyond Blue (Pantone 285 C) */
+  --brand-link-color: #0050ff;
+  --brand-link-hover-color: #0033cc;
+  --brand-nav-background-color: #ffffff;
+  --brand-nav-text-color: #001b4d;
+  --brand-footer-background-color: #0050ff;
+  --brand-footer-text-color: #ffffff;
+}
+
+body.blau-theme {
+  --brand-theme-color: #23b3e9;        /* Blau */
+  --brand-link-color: #23b3e9;
+  --brand-link-hover-color: #64388d;   /* Lila accent */
+  --brand-nav-background-color: #23b3e9;
+  --brand-nav-text-color: #ffffff;
+  --brand-footer-background-color: #64388d;
+  --brand-footer-text-color: #ffffff;
+}
+
+body.alditalk-theme {
+  --brand-theme-color: #00b4dc;        /* Aldi Talk Miami Blue */
+  --brand-link-color: #001e78;         /* Aldi Talk Dark Blue */
+  --brand-link-hover-color: #001e78;
+  --brand-accent-color: #ffc72c;       /* warm yellow/orange accent */
+  --brand-nav-background-color: #001e78;
+  --brand-nav-text-color: #ffffff;
+  --brand-footer-background-color: #001e78;
+  --brand-footer-text-color: #ffffff;
+}
+
 /*brand header footer brand themes*/
 body header .nav-wrapper{
   background-color: var(--nav-background-color);
@@ -1105,9 +1145,3 @@ table {
   transform: translateX(0);
 }
 
-/* Accessibility: darken default accent and hover for better contrast
-:root {
-  --main-accent-color: #C2410C; /* darker orange for contrast */
-  --link-hover-color: #9A3412;  /* darker hover */
-}
- */
