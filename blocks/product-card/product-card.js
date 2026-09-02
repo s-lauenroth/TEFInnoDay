@@ -89,6 +89,13 @@ function buildCard(item) {
   item.appendChild(body);
 }
 
+/* Scroll the track to a clamped target with native smooth scrolling. */
+function scrollTrack(el, to) {
+  const max = el.scrollWidth - el.clientWidth;
+  const target = Math.max(0, Math.min(to, max));
+  el.scrollTo({ left: target, behavior: 'smooth' });
+}
+
 export default function decorate(block) {
   const items = [...block.querySelectorAll(':scope > div')];
   items.forEach(buildCard);
@@ -106,7 +113,7 @@ export default function decorate(block) {
     btn.addEventListener('click', () => {
       const card = track.querySelector('.product-card__item');
       const step = card ? card.getBoundingClientRect().width + 24 : 300;
-      track.scrollBy({ left: dir === 'prev' ? -step : step, behavior: 'smooth' });
+      scrollTrack(track, track.scrollLeft + (dir === 'prev' ? -step : step));
     });
     return btn;
   };

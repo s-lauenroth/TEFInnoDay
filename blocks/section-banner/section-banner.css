@@ -12,10 +12,14 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--spacing-large, 2.5rem);
-  min-height: 108px;
-  padding: var(--spacing-small, 1rem) var(--spacing-large, 2.5rem);
+  min-height: 132px;
+  padding: var(--spacing-regular, 1.5rem) var(--spacing-xlarge, 3rem);
   border-radius: var(--border-radius-large, 1rem);
-  background: linear-gradient(120deg, var(--main-accent-color, #0050ff) 0%, #013ce2 100%);
+  background:
+    radial-gradient(circle at 86% 22%, rgb(255 255 255 / 12%) 0 9px, transparent 10px),
+    radial-gradient(circle at 72% 82%, rgb(255 255 255 / 9%) 0 15px, transparent 16px),
+    radial-gradient(circle at 95% 62%, rgb(255 255 255 / 12%) 0 6px, transparent 7px),
+    linear-gradient(120deg, var(--main-accent-color, #0050ff) 0%, #013ce2 100%);
   color: #fff;
   overflow: hidden;
 }
