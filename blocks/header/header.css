@@ -485,3 +485,39 @@ header nav .nav-tools .lang-switcher { display: inline-flex; }
   }
 
 }
+
+/* ---- O2 brand header polish ---- */
+body.o2-theme header .nav-wrapper {
+  background-color: #fff;
+  border-bottom: 1px solid #e6e8ee;
+  box-shadow: 0 1px 6px rgb(0 0 30 / 6%);
+}
+
+/* swap the authored logo for the clean O2 mark */
+body.o2-theme header nav .nav-brand a {
+  display: inline-block;
+  width: 46px;
+  height: 46px;
+  background: url('/icons/logo-o2.svg') no-repeat center / contain;
+}
+
+body.o2-theme header nav .nav-brand a picture,
+body.o2-theme header nav .nav-brand a img {
+  display: none;
+}
+
+/* dark, readable nav on the white bar */
+body.o2-theme header nav .nav-sections ul > li > a {
+  color: var(--nav-text-color);
+  font-weight: 600;
+}
+
+body.o2-theme header nav .nav-hamburger button {
+  color: var(--nav-text-color);
+}
+
+/* Blau / Aldi Talk keep a coloured bar with a matching bottom edge */
+body.blau-theme header .nav-wrapper,
+body.alditalk-theme header .nav-wrapper {
+  box-shadow: 0 1px 6px rgb(0 0 30 / 12%);
+}

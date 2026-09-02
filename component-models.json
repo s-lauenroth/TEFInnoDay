@@ -59,6 +59,18 @@
             {
               "name": "WeHealthcare Theme",
               "value": "wehealthcare-theme"
+            },
+            {
+              "name": "O2",
+              "value": "o2-theme"
+            },
+            {
+              "name": "Blau",
+              "value": "blau-theme"
+            },
+            {
+              "name": "Aldi Talk",
+              "value": "alditalk-theme"
             }
           ]
       },
