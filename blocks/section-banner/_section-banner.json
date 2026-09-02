@@ -45,7 +45,8 @@
           "component": "reference",
           "valueType": "string",
           "name": "image",
-          "label": "Thumbnail Image",
+          "label": "Foreground Image",
+          "description": "Optional product thumbnail (transparent PNG works best).",
           "multi": false
         },
         {
@@ -54,6 +55,14 @@
           "name": "imageAlt",
           "label": "Image Alt",
           "value": ""
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "bgImage",
+          "label": "Background Image",
+          "description": "Optional backdrop for the banner. Empty = default blue bubble gradient.",
+          "multi": false
         }
       ]
     }

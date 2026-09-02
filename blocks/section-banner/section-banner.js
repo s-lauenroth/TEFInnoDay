@@ -1,7 +1,13 @@
 /**
  * Section Banner block — the blue rounded O2 section header, with an optional
- * brand-filter tab row below it.
- * Field rows (model order): 0 title, 1 text, 2 tabs (comma-separated), 3 image + imageAlt.
+ * background image, a foreground image (e.g. transparent product thumbnails)
+ * and a brand-filter tab row below it.
+ * Field rows (model order):
+ *   0 title
+ *   1 text
+ *   2 tabs (comma-separated)
+ *   3 image + imageAlt (foreground; optional)
+ *   4 bgImage (background; optional, last — falls back to the blue bubble gradient)
  *
  * @param {Element} block
  */
@@ -11,12 +17,18 @@ export default function decorate(block) {
   const textDiv = fields[1];
   const tabs = (fields[2]?.textContent?.trim() || '')
     .split(',').map((t) => t.trim()).filter(Boolean);
-  const picture = fields[3]?.querySelector('picture, img');
+  const fgPic = fields[3]?.querySelector('picture, img');
+  const bgPic = fields[4]?.querySelector('picture, img');
 
   block.textContent = '';
 
   const bar = document.createElement('div');
   bar.className = 'section-banner__bar';
+  if (bgPic) {
+    bar.classList.add('section-banner__bar--custombg');
+    bgPic.classList.add('section-banner__bg');
+    bar.appendChild(bgPic);
+  }
 
   const content = document.createElement('div');
   content.className = 'section-banner__content';
@@ -32,10 +44,10 @@ export default function decorate(block) {
   }
   bar.appendChild(content);
 
-  if (picture) {
+  if (fgPic) {
     const media = document.createElement('div');
     media.className = 'section-banner__media';
-    media.appendChild(picture);
+    media.appendChild(fgPic);
     bar.appendChild(media);
   }
   block.appendChild(bar);

@@ -3,7 +3,7 @@
  *
  * Container block: each direct child <div> is one product item whose field rows
  * (in model order) are:
- *   0 image + imageAlt   (product image on a brand background)
+ *   0 image + imageAlt   (foreground product image — ideally a transparent PNG)
  *   1 energyBadge        (energy-efficiency letter, e.g. "A")
  *   2 promoPill          (highlight pill, e.g. "0,- € Anschlusspreis")
  *   3 title
@@ -13,8 +13,11 @@
  *   7 priceSuffix        ("monatlich")
  *   8 ctaLabel
  *   9 ctaLink
+ *   10 bgImage           (background image behind the product; optional, last)
  *
- * Items render in a horizontal track with prev/next arrows (like the o2 stage).
+ * With a bgImage the foreground image is shown contained (transparent product on
+ * the background); without one it fills the tile (works with baked-in-background
+ * teaser images).
  *
  * @param {Element} block
  */
@@ -35,7 +38,7 @@ function buildPrice(pricePrefix, price, priceSuffix) {
 function buildCard(item) {
   const fields = [...item.querySelectorAll(':scope > div')];
   const text = (i) => fields[i]?.textContent?.trim() || '';
-  const picture = fields[0]?.querySelector('picture, img');
+  const fgPic = fields[0]?.querySelector('picture, img');
   const energyBadge = text(1);
   const promoPill = text(2);
   const title = text(3);
@@ -45,13 +48,22 @@ function buildCard(item) {
   const priceSuffix = text(7);
   const ctaLabel = text(8);
   const ctaLink = fields[9]?.querySelector('a')?.getAttribute('href') || text(9);
+  const bgPic = fields[10]?.querySelector('picture, img');
 
   item.className = 'product-card__item';
   item.textContent = '';
 
   const media = document.createElement('div');
   media.className = 'product-card__media';
-  if (picture) media.appendChild(picture);
+  if (bgPic) {
+    media.classList.add('product-card__media--custombg');
+    bgPic.classList.add('product-card__bg');
+    media.appendChild(bgPic);
+  }
+  if (fgPic) {
+    fgPic.classList.add('product-card__fg');
+    media.appendChild(fgPic);
+  }
   if (energyBadge) {
     const badge = document.createElement('span');
     badge.className = 'product-card__energy';
@@ -125,7 +137,6 @@ export default function decorate(block) {
     const maxScroll = track.scrollWidth - track.clientWidth - 1;
     prev.disabled = track.scrollLeft <= 0;
     next.disabled = track.scrollLeft >= maxScroll;
-    // Hide arrows entirely when everything fits.
     const overflowing = track.scrollWidth > track.clientWidth + 2;
     block.classList.toggle('product-card--static', !overflowing);
   };

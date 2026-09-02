@@ -39,7 +39,8 @@
           "component": "reference",
           "valueType": "string",
           "name": "image",
-          "label": "Product Image",
+          "label": "Product Image (foreground)",
+          "description": "Ideally a transparent PNG when a background image is set.",
           "multi": false
         },
         {
@@ -111,6 +112,14 @@
           "valueType": "string",
           "name": "ctaLink",
           "label": "CTA Link"
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "bgImage",
+          "label": "Background Image",
+          "description": "Optional backdrop behind the product. Empty = default bubble gradient.",
+          "multi": false
         }
       ]
     }

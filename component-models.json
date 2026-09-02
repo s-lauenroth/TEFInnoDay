@@ -7472,6 +7472,13 @@
         "valueType": "string",
         "name": "ctaLink",
         "label": "CTA Link"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "bgImage",
+        "label": "Background Image",
+        "multi": false
       }
     ]
   },
@@ -7512,6 +7519,13 @@
         "name": "imageAlt",
         "label": "Image Alt",
         "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "bgImage",
+        "label": "Background Image",
+        "multi": false
       }
     ]
   },
