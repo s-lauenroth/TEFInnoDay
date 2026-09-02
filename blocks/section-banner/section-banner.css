@@ -1,13 +1,18 @@
 /*
- * Section Banner — blue rounded O2 section header. Brand-aware.
+ * Section Banner — blue rounded O2 section header + optional brand-filter tabs.
+ * Brand-aware via --main-accent-color.
  */
 
 .section-banner {
+  position: relative;
+}
+
+.section-banner__bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--spacing-large, 2.5rem);
-  min-height: 96px;
+  min-height: 108px;
   padding: var(--spacing-small, 1rem) var(--spacing-large, 2.5rem);
   border-radius: var(--border-radius-large, 1rem);
   background: linear-gradient(120deg, var(--main-accent-color, #0050ff) 0%, #013ce2 100%);
@@ -16,13 +21,13 @@
 }
 
 .section-banner__content {
-  max-width: 60%;
+  max-width: 58%;
 }
 
 .section-banner__title {
   margin: 0;
   font-family: var(--extra-font-family, var(--heading-font-family));
-  font-size: clamp(24px, 2.6vw, 34px);
+  font-size: clamp(22px, 2.4vw, 32px);
   line-height: 1.1;
   color: #fff;
 }
@@ -38,24 +43,64 @@
 
 .section-banner__media {
   flex: 0 0 auto;
-  max-width: 38%;
+  max-width: 40%;
 }
 
 .section-banner__media img {
-  max-height: 84px;
+  max-height: 96px;
   width: auto;
   object-fit: contain;
 }
 
-/* Blau / Aldi Talk pick up their own accent automatically via --main-accent-color;
-   give Aldi Talk a flatter, discount-style banner. */
-body.alditalk-theme .section-banner {
+/* White brand-filter tab bar, overlapping the bottom of the blue banner. */
+.section-banner__tabs {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: min(680px, 92%);
+  margin: -22px auto 0;
+  background: #fff;
+  border-radius: var(--border-radius-base, 4px);
+  box-shadow: 0 6px 18px rgb(0 0 30 / 14%);
+  overflow: hidden;
+}
+
+.section-banner__tab {
+  flex: 1;
+  padding: 14px 10px;
+  border: 0;
+  border-right: 1px solid #eef0f4;
+  background: transparent;
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.section-banner__tab:last-child {
+  border-right: 0;
+}
+
+.section-banner__tab.is-active {
+  color: var(--main-accent-color, #0050ff);
+  box-shadow: inset 0 -3px 0 var(--main-accent-color, #0050ff);
+}
+
+.section-banner__tab::after {
+  content: none;
+}
+
+/* Aldi Talk keeps a flatter, discount-style banner. */
+body.alditalk-theme .section-banner__bar {
   border-radius: var(--border-radius-small, 0.125rem);
   background: linear-gradient(120deg, #00b4dc 0%, #001e78 100%);
 }
 
 @media (width < 900px) {
-  .section-banner {
+  .section-banner__bar {
     flex-direction: column;
     align-items: flex-start;
     padding: var(--spacing-regular, 1.5rem);
@@ -67,5 +112,15 @@ body.alditalk-theme .section-banner {
 
   .section-banner__media {
     display: none;
+  }
+
+  .section-banner__tabs {
+    width: 100%;
+    margin-top: var(--spacing-xsmall, 0.75rem);
+  }
+
+  .section-banner__tab {
+    font-size: 13px;
+    padding: 12px 6px;
   }
 }

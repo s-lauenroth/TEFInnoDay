@@ -34,6 +34,14 @@
           "valueType": "string"
         },
         {
+          "component": "text",
+          "valueType": "string",
+          "name": "tabs",
+          "label": "Filter Tabs",
+          "description": "Comma-separated tab labels, e.g. \"Apple, Samsung, Google, Xiaomi\". Leave empty to hide.",
+          "value": ""
+        },
+        {
           "component": "reference",
           "valueType": "string",
           "name": "image",

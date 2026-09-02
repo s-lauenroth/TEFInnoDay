@@ -7492,6 +7492,14 @@
         "valueType": "string"
       },
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "tabs",
+        "label": "Filter Tabs",
+        "description": "Comma-separated tab labels; empty hides them.",
+        "value": ""
+      },
+      {
         "component": "reference",
         "valueType": "string",
         "name": "image",

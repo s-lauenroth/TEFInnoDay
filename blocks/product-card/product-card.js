@@ -1,5 +1,5 @@
 /**
- * Product Card block — O2 product tile grid.
+ * Product Card block — O2 product tile carousel.
  *
  * Container block: each direct child <div> is one product item whose field rows
  * (in model order) are:
@@ -13,6 +13,8 @@
  *   7 priceSuffix        ("monatlich")
  *   8 ctaLabel
  *   9 ctaLink
+ *
+ * Items render in a horizontal track with prev/next arrows (like the o2 stage).
  *
  * @param {Element} block
  */
@@ -30,67 +32,100 @@ function buildPrice(pricePrefix, price, priceSuffix) {
   return wrap;
 }
 
+function buildCard(item) {
+  const fields = [...item.querySelectorAll(':scope > div')];
+  const text = (i) => fields[i]?.textContent?.trim() || '';
+  const picture = fields[0]?.querySelector('picture, img');
+  const energyBadge = text(1);
+  const promoPill = text(2);
+  const title = text(3);
+  const featuresDiv = fields[4];
+  const pricePrefix = text(5);
+  const price = text(6);
+  const priceSuffix = text(7);
+  const ctaLabel = text(8);
+  const ctaLink = fields[9]?.querySelector('a')?.getAttribute('href') || text(9);
+
+  item.className = 'product-card__item';
+  item.textContent = '';
+
+  const media = document.createElement('div');
+  media.className = 'product-card__media';
+  if (picture) media.appendChild(picture);
+  if (energyBadge) {
+    const badge = document.createElement('span');
+    badge.className = 'product-card__energy';
+    badge.textContent = energyBadge;
+    media.appendChild(badge);
+  }
+  item.appendChild(media);
+
+  const body = document.createElement('div');
+  body.className = 'product-card__body';
+  if (promoPill) {
+    const pill = document.createElement('span');
+    pill.className = 'product-card__pill';
+    pill.textContent = promoPill;
+    body.appendChild(pill);
+  }
+  if (title) {
+    const heading = document.createElement('h3');
+    heading.className = 'product-card__title';
+    heading.textContent = title;
+    body.appendChild(heading);
+  }
+  if (featuresDiv && featuresDiv.textContent.trim()) {
+    featuresDiv.className = 'product-card__features';
+    body.appendChild(featuresDiv);
+  }
+  if (price) body.appendChild(buildPrice(pricePrefix, price, priceSuffix));
+  if (ctaLabel && ctaLink) {
+    const anchor = document.createElement('a');
+    anchor.className = 'product-card__cta';
+    anchor.href = ctaLink;
+    anchor.textContent = ctaLabel;
+    body.appendChild(anchor);
+  }
+  item.appendChild(body);
+}
+
 export default function decorate(block) {
   const items = [...block.querySelectorAll(':scope > div')];
+  items.forEach(buildCard);
 
-  items.forEach((item) => {
-    const fields = [...item.querySelectorAll(':scope > div')];
-    const text = (i) => fields[i]?.textContent?.trim() || '';
-    const picture = fields[0]?.querySelector('picture, img');
-    const energyBadge = text(1);
-    const promoPill = text(2);
-    const title = text(3);
-    const featuresDiv = fields[4];
-    const pricePrefix = text(5);
-    const price = text(6);
-    const priceSuffix = text(7);
-    const ctaLabel = text(8);
-    const ctaLink = fields[9]?.querySelector('a')?.getAttribute('href') || text(9);
+  // Wrap items in a scrollable track with prev/next arrows.
+  const track = document.createElement('div');
+  track.className = 'product-card__track';
+  items.forEach((item) => track.appendChild(item));
 
-    item.className = 'product-card__item';
-    item.textContent = '';
+  const makeNav = (dir) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = `product-card__nav product-card__nav--${dir}`;
+    btn.setAttribute('aria-label', dir === 'prev' ? 'Vorherige' : 'Nächste');
+    btn.addEventListener('click', () => {
+      const card = track.querySelector('.product-card__item');
+      const step = card ? card.getBoundingClientRect().width + 24 : 300;
+      track.scrollBy({ left: dir === 'prev' ? -step : step, behavior: 'smooth' });
+    });
+    return btn;
+  };
 
-    // Media with optional energy badge.
-    const media = document.createElement('div');
-    media.className = 'product-card__media';
-    if (picture) media.appendChild(picture);
-    if (energyBadge) {
-      const badge = document.createElement('span');
-      badge.className = 'product-card__energy';
-      badge.textContent = energyBadge;
-      media.appendChild(badge);
-    }
-    item.appendChild(media);
+  const prev = makeNav('prev');
+  const next = makeNav('next');
 
-    // Body.
-    const body = document.createElement('div');
-    body.className = 'product-card__body';
+  const updateNav = () => {
+    const maxScroll = track.scrollWidth - track.clientWidth - 1;
+    prev.disabled = track.scrollLeft <= 0;
+    next.disabled = track.scrollLeft >= maxScroll;
+    // Hide arrows entirely when everything fits.
+    const overflowing = track.scrollWidth > track.clientWidth + 2;
+    block.classList.toggle('product-card--static', !overflowing);
+  };
+  track.addEventListener('scroll', updateNav, { passive: true });
+  window.addEventListener('resize', updateNav);
 
-    if (promoPill) {
-      const pill = document.createElement('span');
-      pill.className = 'product-card__pill';
-      pill.textContent = promoPill;
-      body.appendChild(pill);
-    }
-    if (title) {
-      const heading = document.createElement('h3');
-      heading.className = 'product-card__title';
-      heading.textContent = title;
-      body.appendChild(heading);
-    }
-    if (featuresDiv && featuresDiv.textContent.trim()) {
-      featuresDiv.className = 'product-card__features';
-      body.appendChild(featuresDiv);
-    }
-    if (price) body.appendChild(buildPrice(pricePrefix, price, priceSuffix));
-    if (ctaLabel && ctaLink) {
-      const anchor = document.createElement('a');
-      anchor.className = 'product-card__cta';
-      anchor.href = ctaLink;
-      anchor.textContent = ctaLabel;
-      body.appendChild(anchor);
-    }
-
-    item.appendChild(body);
-  });
+  block.textContent = '';
+  block.append(prev, track, next);
+  requestAnimationFrame(updateNav);
 }
