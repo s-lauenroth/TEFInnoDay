@@ -1,0 +1,106 @@
+/*
+ * Promo Banner — wide O2 promo band. Brand-aware via --main-accent-color.
+ */
+
+.promo-banner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--spacing-large, 2.5rem);
+  min-height: 260px;
+  padding: var(--spacing-large, 2.5rem) var(--spacing-xlarge, 3rem);
+  border-radius: var(--border-radius-large, 1rem);
+  background: linear-gradient(120deg, var(--main-accent-color, #0050ff) 0%, #013ce2 100%);
+  color: #fff;
+  overflow: hidden;
+}
+
+.promo-banner__media {
+  order: 2;
+  justify-self: end;
+  max-width: 100%;
+}
+
+.promo-banner__media img {
+  max-height: 220px;
+  width: auto;
+  object-fit: contain;
+}
+
+.promo-banner__content {
+  order: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-xsmall, 0.75rem);
+}
+
+.promo-banner__title {
+  margin: 0;
+  font-family: var(--extra-font-family, var(--heading-font-family));
+  font-size: clamp(24px, 2.8vw, 36px);
+  line-height: 1.1;
+  color: #fff;
+}
+
+.promo-banner__text {
+  margin: 0;
+  font-size: var(--body-font-size-s, 16px);
+}
+
+.promo-banner__text p {
+  margin: 0;
+}
+
+.promo-banner__price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+}
+
+.promo-banner__price-euros {
+  font-size: 40px;
+}
+
+.promo-banner__price-cents {
+  font-size: 16px;
+}
+
+.promo-banner__price-suffix {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.promo-banner .promo-banner__cta.button {
+  margin-top: var(--spacing-xsmall, 0.75rem);
+  padding: 12px 24px;
+  border: 0;
+  border-radius: var(--border-radius-base, 4px);
+  background: #fff;
+  color: var(--main-accent-color, #0050ff);
+  font-weight: 700;
+  text-decoration: none;
+  overflow: visible;
+}
+
+.promo-banner .promo-banner__cta.button::after {
+  content: none;
+}
+
+.promo-banner .promo-banner__cta.button:hover {
+  background: #f2f6ff;
+  color: var(--main-accent-color, #0050ff);
+  text-decoration: none;
+}
+
+@media (width < 900px) {
+  .promo-banner {
+    grid-template-columns: 1fr;
+  }
+
+  .promo-banner__media {
+    display: none;
+  }
+}

@@ -37,7 +37,10 @@
       "forex",
       "embed-adaptive-form",
       "find-a-doctor",
-      "fragment-list"
+      "fragment-list",
+      "product-card",
+      "section-banner",
+      "promo-banner"
     ]
   },
   {
@@ -110,6 +113,12 @@
       "tnc",
       "wizard",
       "range"
+    ]
+  },
+  {
+    "id": "product-card",
+    "components": [
+      "product"
     ]
   }
 ]

@@ -1,0 +1,70 @@
+/*
+ * Section Banner — blue rounded O2 section header. Brand-aware.
+ */
+
+.section-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-large, 2.5rem);
+  padding: var(--spacing-large, 2.5rem) var(--spacing-xlarge, 3rem);
+  border-radius: var(--border-radius-large, 1rem);
+  background: linear-gradient(120deg, var(--main-accent-color, #0050ff) 0%, #013ce2 100%);
+  color: #fff;
+  overflow: hidden;
+}
+
+.section-banner__content {
+  max-width: 60%;
+}
+
+.section-banner__title {
+  margin: 0;
+  font-family: var(--extra-font-family, var(--heading-font-family));
+  font-size: clamp(24px, 2.6vw, 34px);
+  line-height: 1.1;
+  color: #fff;
+}
+
+.section-banner__text {
+  margin-top: var(--spacing-xsmall, 0.75rem);
+  font-size: var(--body-font-size-s, 16px);
+}
+
+.section-banner__text p {
+  margin: 0;
+}
+
+.section-banner__media {
+  flex: 0 0 auto;
+  max-width: 38%;
+}
+
+.section-banner__media img {
+  max-height: 140px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Blau / Aldi Talk pick up their own accent automatically via --main-accent-color;
+   give Aldi Talk a flatter, discount-style banner. */
+body.alditalk-theme .section-banner {
+  border-radius: var(--border-radius-small, 0.125rem);
+  background: linear-gradient(120deg, #00b4dc 0%, #001e78 100%);
+}
+
+@media (width < 900px) {
+  .section-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--spacing-regular, 1.5rem);
+  }
+
+  .section-banner__content {
+    max-width: 100%;
+  }
+
+  .section-banner__media {
+    display: none;
+  }
+}

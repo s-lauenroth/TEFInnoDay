@@ -1,0 +1,96 @@
+/**
+ * Product Card block — O2 product tile grid.
+ *
+ * Container block: each direct child <div> is one product item whose field rows
+ * (in model order) are:
+ *   0 image + imageAlt   (product image on a brand background)
+ *   1 energyBadge        (energy-efficiency letter, e.g. "A")
+ *   2 promoPill          (highlight pill, e.g. "0,- € Anschlusspreis")
+ *   3 title
+ *   4 features           (richtext bullet list)
+ *   5 pricePrefix        ("nur")
+ *   6 price              ("67,49 €")
+ *   7 priceSuffix        ("monatlich")
+ *   8 ctaLabel
+ *   9 ctaLink
+ *
+ * @param {Element} block
+ */
+function buildPrice(pricePrefix, price, priceSuffix) {
+  const wrap = document.createElement('div');
+  wrap.className = 'product-card__price';
+  const match = price.match(/^(\D*)(\d+)(.*)$/);
+  const lead = match ? match[1] : '';
+  const euros = match ? match[2] : price;
+  const rest = match ? match[3].trim() : '';
+  const prefixHtml = pricePrefix ? `<span class="product-card__price-label">${pricePrefix}</span>` : '';
+  const centsHtml = rest ? `<span class="product-card__price-cents">${rest}</span>` : '';
+  const suffixHtml = priceSuffix ? `<span class="product-card__price-suffix">${priceSuffix}</span>` : '';
+  wrap.innerHTML = `${prefixHtml}<span class="product-card__price-amount">${lead}<span class="product-card__price-euros">${euros}</span>${centsHtml}</span>${suffixHtml}`;
+  return wrap;
+}
+
+export default function decorate(block) {
+  const items = [...block.querySelectorAll(':scope > div')];
+
+  items.forEach((item) => {
+    const fields = [...item.querySelectorAll(':scope > div')];
+    const text = (i) => fields[i]?.textContent?.trim() || '';
+    const picture = fields[0]?.querySelector('picture, img');
+    const energyBadge = text(1);
+    const promoPill = text(2);
+    const title = text(3);
+    const featuresDiv = fields[4];
+    const pricePrefix = text(5);
+    const price = text(6);
+    const priceSuffix = text(7);
+    const ctaLabel = text(8);
+    const ctaLink = fields[9]?.querySelector('a')?.getAttribute('href') || text(9);
+
+    item.className = 'product-card__item';
+    item.textContent = '';
+
+    // Media with optional energy badge.
+    const media = document.createElement('div');
+    media.className = 'product-card__media';
+    if (picture) media.appendChild(picture);
+    if (energyBadge) {
+      const badge = document.createElement('span');
+      badge.className = 'product-card__energy';
+      badge.textContent = energyBadge;
+      media.appendChild(badge);
+    }
+    item.appendChild(media);
+
+    // Body.
+    const body = document.createElement('div');
+    body.className = 'product-card__body';
+
+    if (promoPill) {
+      const pill = document.createElement('span');
+      pill.className = 'product-card__pill';
+      pill.textContent = promoPill;
+      body.appendChild(pill);
+    }
+    if (title) {
+      const heading = document.createElement('h3');
+      heading.className = 'product-card__title';
+      heading.textContent = title;
+      body.appendChild(heading);
+    }
+    if (featuresDiv && featuresDiv.textContent.trim()) {
+      featuresDiv.className = 'product-card__features';
+      body.appendChild(featuresDiv);
+    }
+    if (price) body.appendChild(buildPrice(pricePrefix, price, priceSuffix));
+    if (ctaLabel && ctaLink) {
+      const anchor = document.createElement('a');
+      anchor.className = 'product-card__cta';
+      anchor.href = ctaLink;
+      anchor.textContent = ctaLabel;
+      body.appendChild(anchor);
+    }
+
+    item.appendChild(body);
+  });
+}
